@@ -3,7 +3,7 @@ import { searchGithubUser } from '../api/API';
 import { Candidate } from '../interfaces/Candidate.interface';
 
 const CandidateSearch = () => {
-  const usernames = ['gaearon', 'torvalds', 'addyosmani', 'sindresorhus', 'yyx990803'];
+  const usernames = ['chrismarinica'];
   const [currentIndex, setCurrentIndex] = useState(0);
   const [candidate, setCandidate] = useState<Candidate | null>(null);
   const [loading, setLoading] = useState(false);
