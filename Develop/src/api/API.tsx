@@ -2,25 +2,22 @@ const searchGithub = async () => {
   try {
     console.log('Token:', import.meta.env.VITE_GITHUB_TOKEN);
 
-    const start = Math.floor(Math.random() * 100000000) + 1;
-    // console.log(import.meta.env);
+    // Instead of random fake users, fetch real users from a known GitHub organization
     const response = await fetch(
-      `https://api.github.com/users?since=${start}`,
+      `https://api.github.com/orgs/github/members`, // ← get real members of 'github' organization
       {
         headers: {
           Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`,
         },
       }
     );
-    // console.log('Response:', response);
     const data = await response.json();
     if (!response.ok) {
-      throw new Error('invalid API response, check the network tab');
+      throw new Error('Invalid API response, check the network tab');
     }
-    // console.log('Data:', data);
     return data;
   } catch (err) {
-    // console.log('an error occurred', err);
+    console.error('An error occurred while fetching GitHub users:', err);
     return [];
   }
 };
@@ -34,11 +31,11 @@ const searchGithubUser = async (username: string) => {
     });
     const data = await response.json();
     if (!response.ok) {
-      throw new Error('invalid API response, check the network tab');
+      throw new Error('Invalid API response, check the network tab');
     }
     return data;
   } catch (err) {
-    // console.log('an error occurred', err);
+    console.error('An error occurred while fetching GitHub user profile:', err);
     return {};
   }
 };
